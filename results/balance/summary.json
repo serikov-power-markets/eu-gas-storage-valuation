@@ -1,0 +1,8 @@
+{
+ "first_day": "2023-01-01",
+ "last_day": "2026-11-03",
+ "days": 1403,
+ "max_demand_gwh": 5591.5946189999995,
+ "demand_negative_days": 1,
+ "hdd_threshold_coldest": 18.63879767827529
+}

@@ -8,10 +8,66 @@ the intrinsic value and least-squares Monte Carlo for the full value.
 v0.2 adds the fundamentals: how fast does German storage empty with the weather, and where can it
 stand on 31 March 2027 after a fill of only 62% at the end of October 2026?
 
+v0.3 adds the German gas balance: flows at every border, LNG send-out, production and storage on one
+day-by-day table, checked against the official annual figures.
+
 Related: [de-power-market-ppa](https://github.com/michaelserikov/de-power-market-ppa), where German
 power, gas and carbon prices are cointegrated, and
 [de-battery-multimarket](https://github.com/michaelserikov/de-battery-multimarket), the same
 intrinsic versus flexibility question for a battery.
+
+## The German gas balance (v0.3)
+
+Daily balance from January 2023 to 3 November 2026: ENTSOG physical flows at the borders and production
+points, GIE ALSI LNG send-out and GIE AGSI+ storage. Implied demand is imports minus exports plus
+production, LNG and net storage withdrawal.
+
+The ENTSOG platform reports the same physical gas several times, under each operator of a shared
+pipeline and again at virtual interconnection points, so a plain sum gives Norway about 906 TWh in 2024
+against about 415 TWh in the official figures. Each corridor is therefore counted once (`balance.CORRIDORS`).
+The list was chosen on 2024; 2023 and 2025 are the check.
+
+| TWh | 2023 | 2024 | 2025 |
+|---|---|---|---|
+| Imports including LNG, this balance | 973.6 | 862.2 | 1019.4 |
+| Imports, Bundesnetzagentur | 968 | 865 | 1031 |
+| Exports, this balance | 182.8 | 92.0 | 255.6 |
+| Exports, Bundesnetzagentur | 187 | 89 | 221 |
+| Implied demand, this balance | 824.1 | 838.7 | 860.2 |
+| Consumption, Bundesnetzagentur | 811.5 | 844 | 864 |
+| Demand error | +1.6% | -0.6% | -0.4% |
+
+Demand closes within 1.6%, but partly because errors offset: in 2025 exports are 35 TWh too high, mainly
+at the Czech border (93 TWh here against about 57 officially), and LNG 12 TWh too low (ALSI 94 against 106).
+
+**Storage carries the weather.** Over the heating seasons, demand rises 167 GWh/d per heating degree day,
+and storage withdrawal rises 172 GWh/d. Pipeline imports and LNG barely respond within the day: Norway
++3, the Netherlands +7, LNG +1, while exports also rise by 9. Between the mildest and the coldest tenth of
+days, demand rises by 2,286 GWh/d and storage withdrawal by 2,331 GWh/d.
+
+| Winter (15 Oct to 31 Mar), TWh | 2023/24 | 2024/25 | 2025/26 |
+|---|---|---|---|
+| Norway | 207.4 | 214.1 | 223.4 |
+| Netherlands | 111.0 | 119.8 | 119.9 |
+| Belgium | 88.9 | 55.5 | 117.5 |
+| LNG | 33.5 | 26.1 | 63.6 |
+| Exports | 42.6 | 53.8 | 124.3 |
+| Net supply without storage | 430.8 | 382.4 | 420.5 |
+| Storage withdrawal | 84.2 | 172.6 | 136.0 |
+| Implied demand | 515.2 | 555.0 | 556.6 |
+| Mean heating degree days | 12.09 | 13.07 | 13.52 |
+
+**Why the weather model missed 2024/25.** The held-out test of v0.2 missed the 31 March 2025 fill by 24
+points and pointed to supply. The balance shows it: net supply was 43 TWh below the mean of the two
+neighboring winters, about 17 points of German working gas volume, with Belgium and LNG lower and exports
+slightly higher. 2025/26 was colder, yet took less from storage, because LNG rose by 38 TWh and Belgium
+by 62 TWh, while exports rose by 71 TWh.
+
+Limits: a balance of reported flows, not a supply forecast or a stack model with prices. Line pack, biogas
+and metering differences stay in implied demand. The slopes are descriptive associations over three
+winters. Storage connected across a border (Haidach, Epe and others) is taken from AGSI+ only. No vessel
+tracking, outages or capacity constraints. One day has negative implied demand, which shows the noise in
+single-day values. LNG send-out for the balance comes from ALSI.
 
 ## Results
 
