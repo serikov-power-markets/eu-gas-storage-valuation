@@ -11,9 +11,9 @@ stand on 31 March 2027 after a fill of only 62% at the end of October 2026?
 v0.3 adds the German gas balance: flows at every border, LNG send-out, production and storage on one
 day-by-day table, checked against the official annual figures.
 
-Related: [de-power-market-ppa](https://github.com/michaelserikov/de-power-market-ppa), where German
+Related: [de-power-market-ppa](https://github.com/serikov-power-markets/de-power-market-ppa), where German
 power, gas and carbon prices are cointegrated, and
-[de-battery-multimarket](https://github.com/michaelserikov/de-battery-multimarket), the same
+[de-battery-multimarket](https://github.com/serikov-power-markets/de-battery-multimarket), the same
 intrinsic versus flexibility question for a battery.
 
 ## The German gas balance (v0.3)
